@@ -1,6 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+
+def start(request):
+    return HttpResponse("Hello, world!")
+
+
 def index(request):
     x = {"title": "SardiniaPizza",
          "comment": ["Главная страница сайта", "Вторичная страница сайта"],

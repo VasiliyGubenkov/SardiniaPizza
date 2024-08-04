@@ -48,7 +48,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(blank=True, help_text='Опишите напиток', null=True, verbose_name='Описание')),
                 ('size', models.CharField(help_text='Укажите обьём напитка', max_length=100, verbose_name='Обьём напитка')),
                 ('prise', models.DecimalField(decimal_places=2, help_text='Укажите цену напитка', max_digits=5, verbose_name='Цена напитка')),
-                ('category_of_drinks', models.ManyToManyField(help_text='Выберите категорию напитка', related_name='drinks', to='Others.category_of_drinks', verbose_name='Категория напитка')),
+                ('category_of_drinks', models.ManyToManyField(help_text='Выберите категорию напитка', related_name='drinks', to='main.category_of_drinks', verbose_name='Категория напитка')),
             ],
         ),
         migrations.CreateModel(
@@ -59,7 +59,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(blank=True, help_text='Опишите пиццу', null=True, verbose_name='Описание')),
                 ('size', models.CharField(choices=[('33cm.', '33cm.'), ('40cm.', '40cm.')], help_text='Выберите размер пиццы', max_length=100, verbose_name='Размер пиццы')),
                 ('prise', models.DecimalField(decimal_places=2, help_text='Укажите цену пиццы', max_digits=5, verbose_name='Цена пиццы')),
-                ('category_of_pizza', models.ManyToManyField(help_text='Выберите категорию пиццы', related_name='pizzas', to='Others.category_of_pizza', verbose_name='Категория пиццы')),
+                ('category_of_pizza', models.ManyToManyField(help_text='Выберите категорию пиццы', related_name='pizzas', to='main.category_of_pizza', verbose_name='Категория пиццы')),
             ],
         ),
         migrations.CreateModel(
@@ -71,7 +71,7 @@ class Migration(migrations.Migration):
                 ('amount', models.DecimalField(blank=True, decimal_places=2, help_text='Укажите общую сумму заказа', max_digits=5, null=True, verbose_name='Общая сумма заказа')),
                 ('status_of_payment', models.BooleanField(blank=True, choices=[('False', 'Не оплачен'), ('True', 'Оплачен')], default=False, help_text='Выберите статус оплаты', null=True, verbose_name='Статус оплаты')),
                 ('status_of_delivery', models.BooleanField(blank=True, choices=[('False', 'Не доставлено'), ('True', 'Доставлено')], default=False, help_text='Выберите статус доставки', null=True, verbose_name='Статус доставки')),
-                ('user', models.ForeignKey(blank=True, help_text='Выберите пользователя', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='orders', to='Others.user', verbose_name='Пользователь')),
+                ('user', models.ForeignKey(blank=True, help_text='Выберите пользователя', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='orders', to='main.user', verbose_name='Пользователь')),
             ],
         ),
         migrations.CreateModel(
@@ -82,7 +82,7 @@ class Migration(migrations.Migration):
                 ('price_of_good', models.DecimalField(decimal_places=2, help_text='Укажите цену товара', max_digits=5, verbose_name='Цена товара')),
                 ('quantity_of_good', models.DecimalField(decimal_places=0, default=1, help_text='Укажите количество товара', max_digits=5, verbose_name='Количество товара')),
                 ('content_type', models.ForeignKey(limit_choices_to=models.Q(models.Q(('app_label', 'app_name'), ('model', 'pizza')), models.Q(('app_label', 'app_name'), ('model', 'drink')), _connector='OR'), on_delete=django.db.models.deletion.CASCADE, to='contenttypes.contenttype', verbose_name='Тип товара')),
-                ('user', models.ForeignKey(blank=True, help_text='Выберите пользователя', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='basket', to='Others.user', verbose_name='Пользователь')),
+                ('user', models.ForeignKey(blank=True, help_text='Выберите пользователя', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='basket', to='main.user', verbose_name='Пользователь')),
             ],
         ),
     ]
