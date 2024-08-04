@@ -82,6 +82,12 @@ class Pizza(models.Model):
                                 help_text="Укажите цену пиццы",
                                 null=False,
                                 blank=False,)
+    discount = models.DecimalField(max_digits=5,
+                                decimal_places=2,
+                                verbose_name="Скидка на пиццу",
+                                help_text="Укажите скидку на пиццу",
+                                null=True,
+                                blank=True,)
     category_of_pizza = models.ManyToManyField(Category_of_pizza,
                                           verbose_name="Категория пиццы",
                                           help_text="Выберите категорию пиццы",
@@ -127,6 +133,12 @@ class Drink(models.Model):
                                 help_text="Укажите цену напитка",
                                 null=False,
                                 blank=False,)
+    discount = models.DecimalField(max_digits=5,
+                                   decimal_places=2,
+                                   verbose_name="Скидка на напиток",
+                                   help_text="Укажите скидку на напиток",
+                                   null=True,
+                                   blank=True, )
     category_of_drinks = models.ManyToManyField(Category_of_drinks,
                                           verbose_name="Категория напитка",
                                           help_text="Выберите категорию напитка",
