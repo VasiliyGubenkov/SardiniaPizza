@@ -15,6 +15,12 @@ class Category_of_pizza(models.Model):
                                    help_text="Опишите эту категорию пиццы",
                                    blank=True,
                                    null=True)
+    slug = models.SlugField(max_length=200,
+                            verbose_name="URL",
+                            help_text="Укажите URL-слаг",
+                            unique=True,
+                            blank=True,
+                            null=True,)
 
     def __str__(self):
         return f"{self.name}, {self.description}"
@@ -37,12 +43,21 @@ class Category_of_drinks(models.Model):
                                    blank=True,
                                    null=True)
 
+    slug = models.SlugField(max_length=200,
+                            verbose_name="URL",
+                            help_text="Укажите URL-слаг",
+                            unique=True,
+                            blank=True,
+                            null=True, )
+
     def __str__(self):
         return f"{self.name, self.description}"
 
     class Meta():
         verbose_name = 'Категория напитков'
         verbose_name_plural = 'Категории напитков'
+
+
 
 class Pizza(models.Model):
     name = models.CharField(max_length=100,
@@ -76,6 +91,13 @@ class Pizza(models.Model):
                                           verbose_name="Категория пиццы",
                                           help_text="Выберите категорию пиццы",
                                           related_name="pizzas")
+
+    slug = models.SlugField(max_length=200,
+                            verbose_name="URL",
+                            help_text="Укажите URL-слаг",
+                            unique=True,
+                            blank=True,
+                            null=True, )
 
     baskets = GenericRelation('Basket')
 
@@ -118,6 +140,13 @@ class Drink(models.Model):
                                           help_text="Выберите категорию напитка",
                                           related_name="drinks")
 
+    slug = models.SlugField(max_length=200,
+                            verbose_name="URL",
+                            help_text="Укажите URL-слаг",
+                            unique=True,
+                            blank=True,
+                            null=True, )
+
     baskets = GenericRelation('Basket')
 
     def __str__(self):
@@ -149,6 +178,13 @@ class User(models.Model):
     phone = models.CharField(max_length=100,
                              null=False,
                              blank=False,)
+
+    slug = models.SlugField(max_length=200,
+                            verbose_name="URL",
+                            help_text="Укажите URL-слаг",
+                            unique=True,
+                            blank=True,
+                            null=True, )
 
     def __str__(self):
         return f"{self.name}"
@@ -191,6 +227,13 @@ class Basket(models.Model):
                                            null=False,
                                            blank=False,
                                            default=1, )
+
+    slug = models.SlugField(max_length=200,
+                            verbose_name="URL",
+                            help_text="Укажите URL-слаг",
+                            unique=True,
+                            blank=True,
+                            null=True, )
 
     def save(self, *args, **kwargs):
         if self.good:
@@ -246,6 +289,13 @@ class Order(models.Model):
                                              choices=delivery_statuses,
                                              null=True,
                                              blank=True)
+
+    slug = models.SlugField(max_length=200,
+                            verbose_name="URL",
+                            help_text="Укажите URL-слаг",
+                            unique=True,
+                            blank=True,
+                            null=True, )
 
     def __str__(self):
         return f"Order #{self.id} by {self.user} for the amount {self.amount} paid = {self.status_of_payment}"
