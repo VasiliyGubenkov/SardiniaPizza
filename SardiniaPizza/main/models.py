@@ -26,7 +26,7 @@ class Category_of_pizza(models.Model):
         return f"{self.name}, {self.description}"
 
     class Meta():
-        verbose_name='Категория пиццы'
+        verbose_name='Категорию пиццы'
         verbose_name_plural='Категории пиццы'
 
 
@@ -54,7 +54,7 @@ class Category_of_drinks(models.Model):
         return f"{self.name, self.description}"
 
     class Meta():
-        verbose_name = 'Категория напитков'
+        verbose_name = 'Категорию напитков'
         verbose_name_plural = 'Категории напитков'
 
 
@@ -105,7 +105,7 @@ class Pizza(models.Model):
         return f"{self.name}"
 
     class Meta():
-        verbose_name='Пицца'
+        verbose_name='Пиццу'
         verbose_name_plural = 'Пиццы'
 
 
@@ -190,7 +190,7 @@ class User(models.Model):
         return f"{self.name}"
 
     class Meta():
-        verbose_name='Пользователь'
+        verbose_name='Пользователя'
         verbose_name_plural = 'Пользователи'
 
 
@@ -244,7 +244,7 @@ class Basket(models.Model):
         return f"{self.good.name} - {self.quantity_of_good} x {self.price_of_good}"
 
     class Meta():
-        verbose_name='Корзина'
+        verbose_name='Корзину'
         verbose_name_plural = 'Корзины'
 
 
