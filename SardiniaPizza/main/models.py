@@ -19,6 +19,9 @@ class Category_of_pizza(models.Model):
     def __str__(self):
         return f"{self.name}, {self.description}"
 
+    class Meta():
+        verbose_name='Категории пиццы'
+
 
 class Category_of_drinks(models.Model):
     name = models.CharField(max_length=100,
@@ -35,6 +38,9 @@ class Category_of_drinks(models.Model):
 
     def __str__(self):
         return f"{self.name, self.description}"
+
+    class Meta():
+        verbose_name='Категории напитков'
 
 
 class Pizza(models.Model):
@@ -75,6 +81,9 @@ class Pizza(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+    class Meta():
+        verbose_name='Пиццы'
+
 
 class Drink(models.Model):
     name = models.CharField(max_length=100,
@@ -112,6 +121,9 @@ class Drink(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+    class Meta():
+        verbose_name='Напитки'
+
 
 class User(models.Model):
     user_login = models.CharField(max_length=100,
@@ -137,6 +149,9 @@ class User(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
+    class Meta():
+        verbose_name='Пользователи'
 
 
 class Basket(models.Model):
@@ -180,6 +195,9 @@ class Basket(models.Model):
 
     def __str__(self):
         return f"{self.good.name} - {self.quantity_of_good} x {self.price_of_good}"
+
+    class Meta():
+        verbose_name='Корзины'
 
 
 class Order(models.Model):
@@ -226,3 +244,6 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Order #{self.id} by {self.user} for the amount {self.amount} paid = {self.status_of_payment}"
+
+    class Meta():
+        verbose_name='Заказы'
