@@ -10,7 +10,6 @@ class Category_of_pizza(models.Model):
                             unique=True,
                             blank=False,
                             null=False,)
-
     description = models.TextField(verbose_name="Описание категории",
                                    help_text="Опишите эту категорию пиццы",
                                    blank=True,
@@ -37,26 +36,21 @@ class Category_of_drinks(models.Model):
                             unique=True,
                             blank=False,
                             null=False,)
-
     description = models.TextField(verbose_name="Описание категории",
                                    help_text="Опишите эту категорию напитков",
                                    blank=True,
                                    null=True)
-
     slug = models.SlugField(max_length=200,
                             verbose_name="URL",
                             help_text="Укажите URL-слаг",
                             unique=True,
                             blank=True,
                             null=True, )
-
     def __str__(self):
         return f"{self.name, self.description}"
-
     class Meta():
         verbose_name = 'Категорию напитков'
         verbose_name_plural = 'Категории напитков'
-
 
 
 class Pizza(models.Model):
@@ -66,12 +60,15 @@ class Pizza(models.Model):
                             unique=True,
                             blank=False,
                             null=False,)
-
+    image = models.ImageField(upload_to="pizza/%Y/%m/%d/",
+                              verbose_name="Изображение пиццы",
+                              help_text="Загрузите сюда ссылку на изображение с пиццей",
+                              blank=True,
+                              null=True,)
     description = models.TextField(verbose_name="Описание",
                                    help_text="Опишите пиццу",
                                    null=True,
                                    blank=True)
-
     sizes_of_pizza = [('33cm.', '33cm.'), ('40cm.', '40cm.')]
     size = models.CharField(max_length=100,
                             choices=sizes_of_pizza,
@@ -79,31 +76,25 @@ class Pizza(models.Model):
                             help_text="Выберите размер пиццы",
                             blank=False,
                             null=False,)
-
     prise = models.DecimalField(max_digits=5,
                                 decimal_places=2,
                                 verbose_name="Цена пиццы",
                                 help_text="Укажите цену пиццы",
                                 null=False,
                                 blank=False,)
-
     category_of_pizza = models.ManyToManyField(Category_of_pizza,
                                           verbose_name="Категория пиццы",
                                           help_text="Выберите категорию пиццы",
                                           related_name="pizzas")
-
     slug = models.SlugField(max_length=200,
                             verbose_name="URL",
                             help_text="Укажите URL-слаг",
                             unique=True,
                             blank=True,
                             null=True, )
-
     baskets = GenericRelation('Basket')
-
     def __str__(self):
         return f"{self.name}"
-
     class Meta():
         verbose_name='Пиццу'
         verbose_name_plural = 'Пиццы'
@@ -116,42 +107,39 @@ class Drink(models.Model):
                             unique=True,
                             blank=False,
                             null=False,)
-
+    image = models.ImageField(upload_to="pizza/%Y/%m/%d/",
+                              verbose_name="Изображение напитка",
+                              help_text="Загрузите сюда ссылку на изображение с напитком",
+                              blank=True,
+                              null=True, )
     description = models.TextField(verbose_name="Описание",
                                    help_text="Опишите напиток",
                                    null=True,
                                    blank=True)
-
     size = models.CharField(max_length=100,
                             verbose_name="Обьём напитка",
                             help_text="Укажите обьём напитка",
                             blank=False,
                             null=False,)
-
     prise = models.DecimalField(max_digits=5,
                                 decimal_places=2,
                                 verbose_name="Цена напитка",
                                 help_text="Укажите цену напитка",
                                 null=False,
                                 blank=False,)
-
     category_of_drinks = models.ManyToManyField(Category_of_drinks,
                                           verbose_name="Категория напитка",
                                           help_text="Выберите категорию напитка",
                                           related_name="drinks")
-
     slug = models.SlugField(max_length=200,
                             verbose_name="URL",
                             help_text="Укажите URL-слаг",
                             unique=True,
                             blank=True,
                             null=True, )
-
     baskets = GenericRelation('Basket')
-
     def __str__(self):
         return f"{self.name}"
-
     class Meta():
         verbose_name='Напиток'
         verbose_name_plural = 'Напитки'
@@ -162,33 +150,26 @@ class User(models.Model):
                                   null=True,
                                   blank=True,
                                   unique=True)
-
     name = models.CharField(max_length=100,
                             null=False,
                             blank=False,)
-
     surname = models.CharField(max_length=100,
                                null=False,
                                blank=False,)
-
     email = models.EmailField(unique=False,
                               null=False,
                               blank=False,)
-
     phone = models.CharField(max_length=100,
                              null=False,
                              blank=False,)
-
     slug = models.SlugField(max_length=200,
                             verbose_name="URL",
                             help_text="Укажите URL-слаг",
                             unique=True,
                             blank=True,
                             null=True, )
-
     def __str__(self):
         return f"{self.name}"
-
     class Meta():
         verbose_name='Пользователя'
         verbose_name_plural = 'Пользователи'
@@ -202,24 +183,19 @@ class Basket(models.Model):
                              null=True,
                              blank=True,
                              related_name="basket")
-
     content_type = models.ForeignKey(ContentType,
                                      on_delete=models.CASCADE,
                                      limit_choices_to=models.Q(app_label='app_name', model='pizza') | models.Q(
                                          app_label='app_name', model='drink'),
                                      verbose_name="Тип товара")
-
     object_id = models.PositiveIntegerField(verbose_name="ID товара")
-
     good = GenericForeignKey('content_type', 'object_id')
-
     price_of_good = models.DecimalField(max_digits=5,
                                         decimal_places=2,
                                         verbose_name="Цена товара",
                                         help_text="Укажите цену товара",
                                         null=False,
                                         blank=False, )
-
     quantity_of_good = models.DecimalField(max_digits=5,
                                            decimal_places=0,
                                            verbose_name="Количество товара",
@@ -227,22 +203,18 @@ class Basket(models.Model):
                                            null=False,
                                            blank=False,
                                            default=1, )
-
     slug = models.SlugField(max_length=200,
                             verbose_name="URL",
                             help_text="Укажите URL-слаг",
                             unique=True,
                             blank=True,
                             null=True, )
-
     def save(self, *args, **kwargs):
         if self.good:
             self.price_of_good = self.good.prise
         super().save(*args, **kwargs)
-
     def __str__(self):
         return f"{self.good.name} - {self.quantity_of_good} x {self.price_of_good}"
-
     class Meta():
         verbose_name='Корзину'
         verbose_name_plural = 'Корзины'
@@ -256,24 +228,20 @@ class Order(models.Model):
                              related_name="orders",
                              null=True,
                              blank=True,)
-
     address_of_delivery = models.TextField(verbose_name="Адрес доставки",
                                           help_text="Укажите адрес доставки заказа",
                                           null=True,
                                           blank=True)
-
     content_of_order = models.TextField(verbose_name="Содержание заказа",
                                         help_text="Укажите товары и их количество",
                                         null=True,
                                         blank=True)
-
     amount = models.DecimalField(max_digits=5,
                                decimal_places=2,
                                verbose_name="Общая сумма заказа",
                                help_text="Укажите общую сумму заказа",
                                null=True,
                                blank=True)
-
     payment_statuses = [("False", "Не оплачен"), ("True", "Оплачен")]
     status_of_payment = models.BooleanField(default=False,
                                             verbose_name="Статус оплаты",
@@ -281,7 +249,6 @@ class Order(models.Model):
                                             choices=payment_statuses,
                                             null=True,
                                             blank=True)
-
     delivery_statuses = [("False", "Не доставлено"), ("True", "Доставлено")]
     status_of_delivery = models.BooleanField(default=False,
                                              verbose_name="Статус доставки",
@@ -289,17 +256,14 @@ class Order(models.Model):
                                              choices=delivery_statuses,
                                              null=True,
                                              blank=True)
-
     slug = models.SlugField(max_length=200,
                             verbose_name="URL",
                             help_text="Укажите URL-слаг",
                             unique=True,
                             blank=True,
                             null=True, )
-
     def __str__(self):
         return f"Order #{self.id} by {self.user} for the amount {self.amount} paid = {self.status_of_payment}"
-
     class Meta():
         verbose_name='Заказ'
         verbose_name_plural = 'Заказы'
