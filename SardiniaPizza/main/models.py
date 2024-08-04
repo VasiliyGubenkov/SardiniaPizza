@@ -20,7 +20,8 @@ class Category_of_pizza(models.Model):
         return f"{self.name}, {self.description}"
 
     class Meta():
-        verbose_name='Категории пиццы'
+        verbose_name='Категория пиццы'
+        verbose_name_plural='Категории пиццы'
 
 
 class Category_of_drinks(models.Model):
@@ -40,8 +41,8 @@ class Category_of_drinks(models.Model):
         return f"{self.name, self.description}"
 
     class Meta():
-        verbose_name='Категории напитков'
-
+        verbose_name = 'Категория напитков'
+        verbose_name_plural = 'Категории напитков'
 
 class Pizza(models.Model):
     name = models.CharField(max_length=100,
@@ -82,7 +83,8 @@ class Pizza(models.Model):
         return f"{self.name}"
 
     class Meta():
-        verbose_name='Пиццы'
+        verbose_name='Пицца'
+        verbose_name_plural = 'Пиццы'
 
 
 class Drink(models.Model):
@@ -122,7 +124,8 @@ class Drink(models.Model):
         return f"{self.name}"
 
     class Meta():
-        verbose_name='Напитки'
+        verbose_name='Напиток'
+        verbose_name_plural = 'Напитки'
 
 
 class User(models.Model):
@@ -151,7 +154,8 @@ class User(models.Model):
         return f"{self.name}"
 
     class Meta():
-        verbose_name='Пользователи'
+        verbose_name='Пользователь'
+        verbose_name_plural = 'Пользователи'
 
 
 class Basket(models.Model):
@@ -197,7 +201,8 @@ class Basket(models.Model):
         return f"{self.good.name} - {self.quantity_of_good} x {self.price_of_good}"
 
     class Meta():
-        verbose_name='Корзины'
+        verbose_name='Корзина'
+        verbose_name_plural = 'Корзины'
 
 
 class Order(models.Model):
@@ -246,4 +251,5 @@ class Order(models.Model):
         return f"Order #{self.id} by {self.user} for the amount {self.amount} paid = {self.status_of_payment}"
 
     class Meta():
-        verbose_name='Заказы'
+        verbose_name='Заказ'
+        verbose_name_plural = 'Заказы'
