@@ -35,7 +35,7 @@ class Pizza(models.Model):
     description = models.TextField(verbose_name="Описание", help_text="Опишите пиццу", null=True, blank=True)
     sizes_of_pizza = [('33cm.', '33cm.'), ('40cm.', '40cm.')]
     size = models.CharField(max_length=100, choices=sizes_of_pizza, verbose_name="Размер пиццы", help_text="Выберите размер пиццы", blank=False, null=False,)
-    prise = models.DecimalField(max_digits=5, decimal_places=2, verbose_name="Цена пиццы", help_text="Укажите цену пиццы", null=False, blank=False,)
+    price = models.DecimalField(max_digits=5, decimal_places=2, verbose_name="Цена пиццы", help_text="Укажите цену пиццы", null=False, blank=False,)
     discount = models.DecimalField(max_digits=5, decimal_places=2, verbose_name="Скидка на пиццу", help_text="Укажите скидку на пиццу", null=True, blank=True,)
     category_of_pizza = models.ManyToManyField(Category_of_pizza, verbose_name="Категория пиццы", help_text="Выберите категорию пиццы", related_name="pizzas")
     slug = models.SlugField(max_length=200, verbose_name="URL", help_text="Укажите URL-слаг", unique=True, blank=True, null=True, )
@@ -54,7 +54,7 @@ class Drink(models.Model):
     image = models.ImageField(upload_to="pizza/%Y/%m/%d/", verbose_name="Изображение напитка", help_text="Загрузите сюда ссылку на изображение с напитком", blank=True, null=True, )
     description = models.TextField(verbose_name="Описание", help_text="Опишите напиток", null=True, blank=True)
     size = models.CharField(max_length=100, verbose_name="Обьём напитка", help_text="Укажите обьём напитка", blank=False, null=False,)
-    prise = models.DecimalField(max_digits=5, decimal_places=2, verbose_name="Цена напитка", help_text="Укажите цену напитка", null=False, blank=False,)
+    price = models.DecimalField(max_digits=5, decimal_places=2, verbose_name="Цена напитка", help_text="Укажите цену напитка", null=False, blank=False,)
     discount = models.DecimalField(max_digits=5, decimal_places=2, verbose_name="Скидка на напиток", help_text="Укажите скидку на напиток", null=True, blank=True, )
     category_of_drinks = models.ManyToManyField(Category_of_drinks, verbose_name="Категория напитка", help_text="Выберите категорию напитка", related_name="drinks")
     slug = models.SlugField(max_length=200, verbose_name="URL", help_text="Укажите URL-слаг", unique=True, blank=True, null=True, )
