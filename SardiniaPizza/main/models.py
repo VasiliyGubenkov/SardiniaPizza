@@ -7,22 +7,26 @@ class Category_of_pizza(models.Model):
     name = models.CharField(max_length=100, verbose_name="Категория пиццы", help_text="Создайте категорию пиццы", unique=True, blank=False, null=False,)
     description = models.TextField(verbose_name="Описание категории", help_text="Опишите эту категорию пиццы", blank=True, null=True)
     slug = models.SlugField(max_length=200, verbose_name="URL", help_text="Укажите URL-слаг", unique=True, blank=True, null=True,)
-    def __str__(self):
-        return f"{self.name}, {self.description}"
     class Meta():
+        db_table = 'Категории пиццы'
         verbose_name='Категорию пиццы'
         verbose_name_plural='Категории пиццы'
+    def __str__(self):
+        return f"{self.name}, {self.description}"
+
 
 
 class Category_of_drinks(models.Model):
     name = models.CharField(max_length=100, verbose_name="Категория напитков", help_text="Создайте категорию напитков", unique=True, blank=False, null=False,)
     description = models.TextField(verbose_name="Описание категории", help_text="Опишите эту категорию напитков", blank=True, null=True)
     slug = models.SlugField(max_length=200, verbose_name="URL", help_text="Укажите URL-слаг", unique=True, blank=True, null=True, )
-    def __str__(self):
-        return f"{self.name, self.description}"
     class Meta():
+        db_table = 'Категории напитков'
         verbose_name = 'Категорию напитков'
         verbose_name_plural = 'Категории напитков'
+    def __str__(self):
+        return f"{self.name, self.description}"
+
 
 
 class Pizza(models.Model):
@@ -36,11 +40,13 @@ class Pizza(models.Model):
     category_of_pizza = models.ManyToManyField(Category_of_pizza, verbose_name="Категория пиццы", help_text="Выберите категорию пиццы", related_name="pizzas")
     slug = models.SlugField(max_length=200, verbose_name="URL", help_text="Укажите URL-слаг", unique=True, blank=True, null=True, )
     baskets = GenericRelation('Basket')
-    def __str__(self):
-        return f"{self.name}"
     class Meta():
+        db_table = 'Пиццы'
+        ordering = ['name']
         verbose_name='Пиццу'
         verbose_name_plural = 'Пиццы'
+    def __str__(self):
+        return f"{self.name}"
 
 
 class Drink(models.Model):
@@ -53,11 +59,14 @@ class Drink(models.Model):
     category_of_drinks = models.ManyToManyField(Category_of_drinks, verbose_name="Категория напитка", help_text="Выберите категорию напитка", related_name="drinks")
     slug = models.SlugField(max_length=200, verbose_name="URL", help_text="Укажите URL-слаг", unique=True, blank=True, null=True, )
     baskets = GenericRelation('Basket')
-    def __str__(self):
-        return f"{self.name}"
     class Meta():
+        db_table = 'Напитки'
+        ordering = ['name']
         verbose_name='Напиток'
         verbose_name_plural = 'Напитки'
+    def __str__(self):
+        return f"{self.name}"
+
 
 
 class User(models.Model):
@@ -67,11 +76,12 @@ class User(models.Model):
     email = models.EmailField(unique=False, null=False, blank=False,)
     phone = models.CharField(max_length=100, null=False, blank=False,)
     slug = models.SlugField(max_length=200, verbose_name="URL", help_text="Укажите URL-слаг", unique=True, blank=True, null=True, )
-    def __str__(self):
-        return f"{self.name}"
     class Meta():
+        db_table = 'Пользователи'
         verbose_name='Пользователя'
         verbose_name_plural = 'Пользователи'
+    def __str__(self):
+        return f"{self.name}"
 
 
 class Basket(models.Model):
@@ -86,11 +96,13 @@ class Basket(models.Model):
         if self.good:
             self.price_of_good = self.good.prise
         super().save(*args, **kwargs)
-    def __str__(self):
-        return f"{self.good.name} - {self.quantity_of_good} x {self.price_of_good}"
     class Meta():
+        db_table = 'Корзины пользователей'
+        ordering = ['user']
         verbose_name='Корзину'
         verbose_name_plural = 'Корзины'
+    def __str__(self):
+        return f"{self.good.name} - {self.quantity_of_good} x {self.price_of_good}"
 
 
 class Order(models.Model):
@@ -103,8 +115,10 @@ class Order(models.Model):
     delivery_statuses = [("False", "Не доставлено"), ("True", "Доставлено")]
     status_of_delivery = models.BooleanField(default=False, verbose_name="Статус доставки", help_text="Выберите статус доставки", choices=delivery_statuses, null=True, blank=True)
     slug = models.SlugField(max_length=200, verbose_name="URL", help_text="Укажите URL-слаг", unique=True, blank=True, null=True, )
-    def __str__(self):
-        return f"Order #{self.id} by {self.user} for the amount {self.amount} paid = {self.status_of_payment}"
     class Meta():
+        db_table = 'Заказы'
+        ordering = ['user']
         verbose_name='Заказ'
         verbose_name_plural = 'Заказы'
+    def __str__(self):
+        return f"Order #{self.id} by {self.user} for the amount {self.amount} paid = {self.status_of_payment}"
