@@ -13,7 +13,7 @@ from .models import *
 @admin.register(Category_of_pizza)
 class Category_of_pizza_Admin(admin.ModelAdmin):
     list_display = ('name', 'description')
-    search_fields = ('name',)
+    search_fields = ('name', 'description')
     list_filter = ('name',)
     ordering = ('name',)
     list_per_page = 20
@@ -22,7 +22,7 @@ class Category_of_pizza_Admin(admin.ModelAdmin):
 @admin.register(Category_of_drinks)
 class Category_of_drinks_Admin(admin.ModelAdmin):
     list_display = ('name', 'description')
-    search_fields = ('name',)
+    search_fields = ('name', 'description')
     list_filter = ('name',)
     ordering = ('name',)
     list_per_page = 20
@@ -31,7 +31,7 @@ class Category_of_drinks_Admin(admin.ModelAdmin):
 @admin.register(Pizza)
 class PizzaAdmin(admin.ModelAdmin):
     list_display = ('name', 'description', 'size', 'price', 'discount')
-    search_fields = ('name',)
+    search_fields = ('name', 'description', 'size', 'price', 'discount')
     list_filter = ('name',)
     ordering = ('price',)
     list_per_page = 20
@@ -40,7 +40,7 @@ class PizzaAdmin(admin.ModelAdmin):
 @admin.register(Drink)
 class DrinkAdmin(admin.ModelAdmin):
     list_display = ('name', 'description', 'size', 'price', 'discount')
-    search_fields = ('name',)
+    search_fields = ('name', 'description', 'size', 'price', 'discount')
     list_filter = ('name',)
     ordering = ('price',)
     list_per_page = 20
