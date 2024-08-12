@@ -1,3 +1,4 @@
+from decimal import Decimal
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
@@ -47,6 +48,13 @@ class Pizza(models.Model):
         verbose_name_plural = 'Пиццы'
     def __str__(self):
         return f"{self.name}"
+    def id_on_page(self):
+        return f'{self.id : 05}'
+    def sell_price(self):
+        if self.discount:
+            return self.price - (self.price*self.discount/Decimal('100'))
+        else:
+            return self.price
 
 
 class Drink(models.Model):
