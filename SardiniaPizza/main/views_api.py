@@ -6,27 +6,38 @@ from .serializers import *
 
 
 class PizzaView(APIView):
-    def get(self, request, pk=None):
+    def get(self, request):
         # Получаем query parameters из запроса
         query_params = request.query_params
 
         # Проверяем условия
-        if pk is None and not query_params:
+        if not query_params:
             all_pizzas = Pizza.objects.all()
             all_pizzas_serializered = PizzaSerializer(all_pizzas, many=True)
-            return Response(all_pizzas_serializered.data, status=200)
-
-        elif pk is not None and not query_params:
-            # Если есть только pk
-            return Response({"message": f"Запрос с pk: {pk}"}, status=200)
-
-        elif pk is None and query_params:
-            # Если есть только query parameters
-            return Response({"message": f"Запрос с query parameters: {query_params}"}, status=200)
+            return Response(all_pizzas_serializered.data, status=status.HTTP_200_OK)
 
         else:
-            # Если есть и pk, и query parameters
-            return Response({"message": f"Запрос с pk: {pk} и query parameters: {query_params}"}, status=200)
+            # Если есть query parameters
+            # Фильтруем по каждому из возможных параметров
+            pizzas = Pizza.objects.all()
+            if 'name' in query_params:
+                pizzas = pizzas.filter(name=query_params['name'])
+            if 'size' in query_params:
+                pizzas = pizzas.filter(size=query_params['size'])
+            if 'price' in query_params:
+                pizzas = pizzas.filter(price=query_params['price'])
+            if 'discount' in query_params:
+                pizzas = pizzas.filter(discount=query_params['discount'])
+            if 'category_of_pizza' in query_params:
+                pizzas = pizzas.filter(category_of_pizza=query_params['category_of_pizza'])
+            if 'slug' in query_params:
+                pizzas = pizzas.filter(slug=query_params['slug'])
+
+            # Сериализуем отфильтрованные объекты
+            pizzas_serializered = PizzaSerializer(pizzas, many=True)
+
+            return Response(pizzas_serializered.data, status=status.HTTP_200_OK)
+
 
     def post(self, request, pk):
         pass
