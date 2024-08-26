@@ -1,8 +1,14 @@
 from rest_framework import serializers
-from .models import Pizza, Drink, User, Basket, Order
+from .models import Pizza, Drink, User, Basket, Order, Category_of_pizza
 
+
+class CategoryOfPizzaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category_of_pizza
+        fields = '__all__'
 
 class PizzaSerializer(serializers.ModelSerializer):
+    category_of_pizza = CategoryOfPizzaSerializer(many=True, read_only=True)
     class Meta:
         model = Pizza
         fields = '__all__'
