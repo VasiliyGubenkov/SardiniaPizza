@@ -217,7 +217,7 @@ def DrinkView(request):
         if 'discount' in query_params:
             object_to_update = object_to_update.filter(discount=query_params['discount'])
         if 'category_of_drinks' in query_params:
-            object_to_update = object_to_update.filter(category_of_pizza=query_params['category_of_drinks'])
+            object_to_update = object_to_update.filter(category_of_drinks=query_params['category_of_drinks'])
         if 'slug' in query_params:
             object_to_update = object_to_update.filter(slug=query_params['slug'])
 
@@ -253,8 +253,8 @@ def DrinkView(request):
                 object_to_delete = object_to_delete.filter(price=query_params['price'])
             if 'discount' in query_params:
                 object_to_delete = object_to_delete.filter(discount=query_params['discount'])
-            if 'category_of_drink' in query_params:
-                object_to_delete = object_to_delete.filter(category_of_pizza=query_params['category_of_drink'])
+            if 'category_of_drinks' in query_params:
+                object_to_delete = object_to_delete.filter(category_of_drinks=query_params['category_of_drinks'])
             if 'slug' in query_params:
                 object_to_delete = object_to_delete.filter(slug=query_params['slug'])
             # Удаляем все найденные напитки
@@ -286,8 +286,8 @@ def DrinkView(request):
             object_to_update = object_to_update.filter(price=query_params['price'])
         if 'discount' in query_params:
             object_to_update = object_to_update.filter(discount=query_params['discount'])
-        if 'category_of_drink' in query_params:
-            object_to_update = object_to_update.filter(category_of_pizza=query_params['category_of_drink'])
+        if 'category_of_drinks' in query_params:
+            object_to_update = object_to_update.filter(category_of_drinks=query_params['category_of_drinks'])
         if 'slug' in query_params:
             object_to_update = object_to_update.filter(slug=query_params['slug'])
 
