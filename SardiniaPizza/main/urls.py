@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from . import views_web, views_api, views_api_GenericAPIView, views_api_LogicMethod, views_api_DecoratorMethod, views_api_ModelMethod
+from . import views_web, views_api, views_api_GenericAPIViewMethod, views_api_LogicMethod, views_api_DecoratorMethod, views_api_ModelMethod
 
 
 # Создание экземпляра маршрутизатора и регистрация вьюшек в нём(для модел-метода)
@@ -26,16 +26,16 @@ urlpatterns = [
     path('api/order/', views_api.OrderView.as_view(), name='order'),
 
     # Блок путей для вьюшек с дженериками
-    # path('api/pizza/', views_api_GenericAPIView.PizzaListCreateView.as_view(), name='pizza-list-create'),
-    # path('api/pizza/<int:pk>/', views_api_GenericAPIView.PizzaRetrieveUpdateDestroyView.as_view(), name='pizza-retrieve-update-destroy'),
-    # path('api/drink/', views_api_GenericAPIView.DrinkListCreateView.as_view(), name='drink-list-create'),
-    # path('api/drink/<int:pk>/', views_api_GenericAPIView.DrinkRetrieveUpdateDestroyView.as_view(), name='drink-retrieve-update-destroy'),
-    # path('api/user/', views_api_GenericAPIView.UserListCreateView.as_view(), name='user-list-create'),
-    # path('api/user/<int:pk>/', views_api_GenericAPIView.UserRetrieveUpdateDestroyView.as_view(), name='user-retrieve-update-destroy'),
-    # path('api/basket/', views_api_GenericAPIView.BasketListCreateView.as_view(), name='basket-list-create'),
-    # path('api/basket/<int:pk>/', views_api_GenericAPIView.BasketRetrieveUpdateDestroyView.as_view(), name='basket-retrieve-update-destroy'),
-    # path('api/order/', views_api_GenericAPIView.OrderListCreateView.as_view(), name='order-list-create'),
-    # path('api/order/<int:pk>/', views_api_GenericAPIView.OrderRetrieveUpdateDestroyView.as_view(), name='order-retrieve-update-destroy'),
+    # path('api/pizza/', views_api_GenericAPIViewMethod.PizzaListCreateView.as_view(), name='pizza-list-create'),
+    # path('api/pizza/<int:pk>/', views_api_GenericAPIViewMethod.PizzaRetrieveUpdateDestroyView.as_view(), name='pizza-retrieve-update-destroy'),
+    # path('api/drink/', views_api_GenericAPIViewMethod.DrinkListCreateView.as_view(), name='drink-list-create'),
+    # path('api/drink/<int:pk>/', views_api_GenericAPIViewMethod.DrinkRetrieveUpdateDestroyView.as_view(), name='drink-retrieve-update-destroy'),
+    # path('api/user/', views_api_GenericAPIViewMethod.UserListCreateView.as_view(), name='user-list-create'),
+    # path('api/user/<int:pk>/', views_api_GenericAPIViewMethod.UserRetrieveUpdateDestroyView.as_view(), name='user-retrieve-update-destroy'),
+    # path('api/basket/', views_api_GenericAPIViewMethod.BasketListCreateView.as_view(), name='basket-list-create'),
+    # path('api/basket/<int:pk>/', views_api_GenericAPIViewMethod.BasketRetrieveUpdateDestroyView.as_view(), name='basket-retrieve-update-destroy'),
+    # path('api/order/', views_api_GenericAPIViewMethod.OrderListCreateView.as_view(), name='order-list-create'),
+    # path('api/order/<int:pk>/', views_api_GenericAPIViewMethod.OrderRetrieveUpdateDestroyView.as_view(), name='order-retrieve-update-destroy'),
 
     # Блок путей для вьюшек с логическим ветвлением
     # path('api/pizza/', views_api_LogicMethod.PizzaView, name='pizza-list'),
