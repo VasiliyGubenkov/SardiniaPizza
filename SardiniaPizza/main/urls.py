@@ -4,12 +4,12 @@ from . import views_web, views_api, views_api_GenericAPIViewMethod, views_api_Lo
 
 
 # Создание экземпляра маршрутизатора и регистрация вьюшек в нём(для модел-метода)
-# router = DefaultRouter()
-# router.register(r'pizza', views_api_ModelMethod.PizzaViewSet, basename='pizza')
-# router.register(r'drink', views_api_ModelMethod.DrinkViewSet, basename='drink')
-# router.register(r'user', views_api_ModelMethod.UserViewSet, basename='user')
-# router.register(r'basket', views_api_ModelMethod.BasketViewSet, basename='basket')
-# router.register(r'order', views_api_ModelMethod.OrderViewSet, basename='order')
+router = DefaultRouter()
+router.register(r'pizza', views_api_ModelMethod.PizzaViewSet, basename='pizza')
+router.register(r'drink', views_api_ModelMethod.DrinkViewSet, basename='drink')
+router.register(r'user', views_api_ModelMethod.UserViewSet, basename='user')
+router.register(r'basket', views_api_ModelMethod.BasketViewSet, basename='basket')
+router.register(r'order', views_api_ModelMethod.OrderViewSet, basename='order')
 
 app_name = 'main'
 
@@ -17,13 +17,13 @@ urlpatterns = [
     path('', views_web.start, name='start'),
 
     #Блок путей для моих любимых апи-вьюшек
-    path('index/', views_web.index, name='index'),
-    path('about/', views_web.about, name='about'),
-    path('api/pizza/', views_api.PizzaView.as_view(), name='pizza'),
-    path('api/drink/', views_api.DrinkView.as_view(), name='drink'),
-    path('api/user/', views_api.UserView.as_view(), name='user'),
-    path('api/basket/', views_api.BasketView.as_view(), name='basket'),
-    path('api/order/', views_api.OrderView.as_view(), name='order'),
+    # path('index/', views_web.index, name='index'),
+    # path('about/', views_web.about, name='about'),
+    # path('api/pizza/', views_api.PizzaView.as_view(), name='pizza'),
+    # path('api/drink/', views_api.DrinkView.as_view(), name='drink'),
+    # path('api/user/', views_api.UserView.as_view(), name='user'),
+    # path('api/basket/', views_api.BasketView.as_view(), name='basket'),
+    # path('api/order/', views_api.OrderView.as_view(), name='order'),
 
     # Блок путей для вьюшек с дженериками
     # path('api/pizza/', views_api_GenericAPIViewMethod.PizzaListCreateView.as_view(), name='pizza-list-create'),
@@ -52,6 +52,6 @@ urlpatterns = [
     # path('api/order/', views_api_DecoratorMethod.OrderView, name='order-list'),
 
     # Блок путь для вьюшек модел-вью-сет
-    # path('api/', include(router.urls)),
+    path('api/', include(router.urls)),
 
 ]
